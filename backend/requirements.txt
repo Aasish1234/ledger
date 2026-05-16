@@ -1,0 +1,5 @@
+cd backend
+echo "fastapi==0.104.1" > requirements.txt
+echo "uvicorn==0.24.0" >> requirements.txt
+echo "pydantic==2.5.2" >> requirements.txt
+pip install -r requirements.txt

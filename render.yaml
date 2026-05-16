@@ -1,0 +1,32 @@
+databases:
+  - name: shadow-ledger-db
+    plan: free
+    ipAllowList: []
+
+services:
+  - type: web
+    name: shadow-ledger-backend
+    runtime: python
+    rootDir: backend
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: shadow-ledger-db
+          property: connectionString
+
+  - type: web
+    name: shadow-ledger-frontend
+    runtime: node
+    rootDir: frontend
+    plan: free
+    buildCommand: "npm install && npm run build"
+    startCommand: "npx serve -s dist" 
+    envVars:
+      - key: REACT_APP_API_URL
+        fromService:
+          type: web
+          name: shadow-ledger-backend
+          envVarKey: RENDER_EXTERNAL_URL

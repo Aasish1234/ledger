@@ -1,0 +1,16 @@
+# --- The Backend Shields (Python) ---
+# Ignores the massive virtual environment and cached files
+backend/venv/
+backend/__pycache__/
+*.pyc
+
+# --- The Frontend Shields (React) ---
+# Ignores the massive Node modules and build output
+frontend/node_modules/
+frontend/dist/
+.env
+
+# --- OS Junk Files ---
+# Ignores hidden files created by Windows and Mac
+.DS_Store
+Thumbs.db
